@@ -7,7 +7,7 @@
   <!-- 配置参数 -->
     <properties>
         <!-- 指定spring的版本号 -->
-        <spring.version>4.0.2.RELEASE</spring.version>
+        <spring.version>5.2.6.RELEASE</spring.version>
     </properties>
   <dependencies>
   <dependency>
