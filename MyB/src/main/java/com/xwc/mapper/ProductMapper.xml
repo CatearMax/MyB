@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xwc.mapper.ProductMapper">
+
+	<insert id="batchInsert" parameterType="list">
+		insert into product(pro_name,pro_desc) 
+		<foreach collection="list" item="product" open="values" separator=",">
+			(#{product.proName},#{product.proDesc})
+		</foreach>
+	</insert>
+	
+	<delete id="batchDelete" parameterType="list">
+		delete from product where pro_id in
+		<foreach collection="list" item="pro_id" open="(" close=")" separator=",">
+			#{pro_id}
+		</foreach>
+	</delete>
+	
+	 <update id="batchUpdate" parameterType="list">
+	 	<foreach collection="list" item="product">
+	 		update product set pro_name=#{product.proName} ,
+	 			pro_desc=#{product.proDesc} where pro_id=#{product.proId};
+	 	</foreach>
+	 </update>
+	
+</mapper>

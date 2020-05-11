@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 加载配置文件 -->
+	<properties resource="db.properties"></properties>
+	
+	<!-- settings全局配置 -->
+    <settings>
+    	<setting name="cacheEnabled" value="true"/>
+    	<!-- 懒加载 多表关联中若只查询单个表 则关联表数据不会被加载 -->
+    	<setting name="lazyLoadingEnabled" value="true"/>
+    	<!-- 积极加载 -->
+    	<setting name="aggressiveLazyLoading" value="false"/>
+    	<setting name="logImpl" value="STDOUT_LOGGING"/> 
+    </settings>
+    
+    <!-- 别名 -->
+    <typeAliases>
+    	<!-- 扫描指定包下类 并将类名作为别名 不区分大小写 -->
+    	<package name="com.xwc.entity"/>
+    </typeAliases>
+    
+	<!-- 配置多个mybatis的环境  default 当前使用的环境的id-->
+	<environments default="final">
+		<environment id="final">
+			<!-- 配置事务管理的类型 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 配置数据库连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver" 
+                	value="${driver}" />
+                <property name="url" 
+                	value="${url}" />
+                <property name="username" value="${name}" />
+                <property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!--  配置mybatis的映射  -->
+	<mappers>
+		<!-- class mapper接口的全类名 -->
+		<package name="com.xwc.mapper"/>
+	</mappers>
+</configuration>
